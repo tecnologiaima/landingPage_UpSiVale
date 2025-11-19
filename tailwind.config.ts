@@ -12,7 +12,7 @@ export default {
       fontFamily: {
         body: ['Sora', 'sans-serif'],
         headline: ['Sora', 'sans-serif'],
-        logo: ['Cinzel', 'serif'],
+        logo: ['Sora', 'sans-serif'],
         code: ['monospace'],
       },
       colors: {

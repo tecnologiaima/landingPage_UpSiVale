@@ -34,9 +34,9 @@ export default function Home() {
         <section id="what-is-ima" className="py-20 sm:py-24">
           <div className="container mx-auto px-4">
             <div className="mx-auto max-w-2xl text-center">
-              <h2 className="text-3xl font-bold tracking-tight text-primary sm:text-4xl font-headline">¿Qué es <Logo className="text-4xl sm:text-5xl" />?</h2>
-              <p className="mt-4 text-lg text-foreground/80">
-                <Logo className="text-lg" /> es tu aliado para el bienestar integral. Te ofrecemos un ecosistema de salud preventiva y correctiva, accesible y fácil de usar.
+              <h2 className="text-3xl font-bold tracking-tight text-primary sm:text-4xl font-headline flex items-center justify-center gap-2">¿Qué es <Logo height={32} />?</h2>
+              <p className="mt-4 text-lg text-foreground/80 flex items-center justify-center gap-1">
+                <Logo height={18} /> es tu aliado para el bienestar integral. Te ofrecemos un ecosistema de salud preventiva y correctiva, accesible y fácil de usar.
               </p>
             </div>
 
