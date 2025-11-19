@@ -25,8 +25,10 @@ export default function Home() {
             className="h-8 w-auto"
           />
         </div>
-        <Button>
-          Activa tu beneficio <ArrowRight className="ml-2" />
+        <Button asChild>
+          <Link href="#">
+            Activa tu beneficio <ArrowRight className="ml-2" />
+          </Link>
         </Button>
       </header>
 
@@ -40,8 +42,10 @@ export default function Home() {
             Con Sí Vale, accede a más de 25 herramientas de prevención y bienestar, potenciadas por la inteligencia artificial de ima para que tomes el control de tu salud.
           </p>
           <div className="mt-10">
-            <Button size="lg">
-              Activa tu beneficio ahora <ArrowRight className="ml-2" />
+            <Button size="lg" asChild>
+              <Link href="#">
+                Activa tu beneficio ahora <ArrowRight className="ml-2" />
+              </Link>
             </Button>
           </div>
         </section>
@@ -84,8 +88,10 @@ export default function Home() {
                         Activa tu beneficio y disfruta de <span className="font-bold text-foreground">un mes de acceso total a ima</span>, cortesía de Sí Vale. Sin costo, sin compromisos.
                     </p>
                     <div className="mt-8">
-                        <Button size="lg">
-                            Obtener mi mes gratis <ArrowRight className="ml-2" />
+                        <Button size="lg" asChild>
+                            <Link href="#">
+                              Obtener mi mes gratis <ArrowRight className="ml-2" />
+                            </Link>
                         </Button>
                     </div>
                 </div>
@@ -127,8 +133,10 @@ export default function Home() {
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl font-headline">Empieza a cuidar de ti hoy mismo</h2>
             <div className="mt-8">
-              <Button size="lg">
-                Activar mi beneficio <ArrowRight className="ml-2" />
+              <Button size="lg" asChild>
+                <Link href="#">
+                  Activar mi beneficio <ArrowRight className="ml-2" />
+                </Link>
               </Button>
             </div>
           </div>
