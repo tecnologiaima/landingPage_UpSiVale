@@ -10,8 +10,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        body: ['Inter', 'sans-serif'],
-        headline: ['Inter', 'sans-serif'],
+        body: ['Sora', 'sans-serif'],
+        headline: ['Sora', 'sans-serif'],
+        logo: ['Cinzel', 'serif'],
         code: ['monospace'],
       },
       colors: {
