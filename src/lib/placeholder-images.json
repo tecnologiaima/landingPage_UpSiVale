@@ -2,9 +2,9 @@
   "placeholderImages": [
     {
       "id": "age-estimation",
-      "description": "A person's face for age estimation feature.",
-      "imageUrl": "https://images.unsplash.com/photo-1650418988726-a03b31e504e3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxmYWNlJTIwcG9ydHJhaXR8ZW58MHx8fHwxNzYzNTgwNzA2fDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "face portrait"
+      "description": "A person's face with a technological overlay for age estimation feature.",
+      "imageUrl": "https://images.unsplash.com/photo-1534723452862-4c874018d66d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxyb2JvdCUyMGZhY2V8ZW58MHx8fHwxNzE4ODMxNjc1fDA&ixlib=rb-4.0.3&q=80&w=1080",
+      "imageHint": "face technology"
     },
     {
       "id": "food-analysis",
