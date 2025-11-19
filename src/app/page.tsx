@@ -168,7 +168,7 @@ export default function Home() {
             <div className="grid grid-cols-2 gap-8 text-center sm:grid-cols-3 md:text-left">
               <FooterLinks title="Legal" links={[{href: "#", text: "Aviso de privacidad"}, {href: "#", text: "Términos y condiciones"}]} />
               <FooterLinks title="Ayuda" links={[{href: "#", text: "Preguntas frecuentes"}, {href: "#", text: "Contacto"}]} />
-              <FooterLinks title="Sitios" links={[{href: "#", text: "Sí Vale"}, {href: "#", text: "ima"}]} />
+              <FooterLinks title="Sitios" links={[{href: "https://www.sivale.mx/", text: "Sí Vale"}, {href: "#", text: "ima"}]} />
             </div>
             <div className="flex items-center gap-4">
               <Link href="#" className="text-muted-foreground hover:text-primary" aria-label="Facebook"><Facebook /></Link>
