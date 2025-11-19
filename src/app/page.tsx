@@ -1,3 +1,4 @@
+"use client"
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Sparkles, Camera, MessageCircle, Facebook, Instagram, Twitter, ArrowRight } from "lucide-react";
@@ -15,7 +16,7 @@ const Logo = ({ className, size = 'default' }: { className?: string, size?: 'def
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="flex min-h-screen flex-col bg-background">
       <header className="container mx-auto flex items-center justify-between px-4 py-6">
         <h1 className="text-3xl font-bold text-primary font-logo">ima</h1>
         <Button>
@@ -26,10 +27,10 @@ export default function Home() {
       <main className="flex-1">
         {/* Hero Section */}
         <section className="container mx-auto flex flex-col items-center px-4 py-20 text-center sm:py-32">
-          <h1 className="text-4xl font-bold tracking-tight text-primary sm:text-6xl md:text-7xl font-headline">
+          <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-6xl md:text-7xl font-headline">
             Tu bienestar, nuestra prioridad.
           </h1>
-          <p className="mt-6 max-w-2xl text-lg text-foreground/80">
+          <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
             Accede a consultas médicas, nutricionales y psicológicas ilimitadas con tu vale Sí Vale.
           </p>
           <div className="mt-10">
@@ -40,11 +41,11 @@ export default function Home() {
         </section>
 
         {/* What is ima Section */}
-        <section id="what-is-ima" className="py-20 sm:py-24">
+        <section id="what-is-ima" className="py-20 sm:py-24 bg-secondary/50">
           <div className="container mx-auto px-4">
             <div className="mx-auto max-w-2xl text-center">
-              <h2 className="text-3xl font-bold tracking-tight text-primary sm:text-4xl font-headline flex items-center justify-center gap-2">¿Qué es <span className="text-4xl font-bold text-primary font-logo">ima</span>?</h2>
-              <p className="mt-4 text-lg text-foreground/80 flex items-center justify-center gap-1">
+              <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl font-headline flex items-center justify-center gap-2">¿Qué es <span className="text-4xl font-bold text-primary font-logo">ima</span>?</h2>
+              <p className="mt-4 text-lg text-muted-foreground flex items-center justify-center gap-1">
                 <span className="text-2xl font-bold text-primary font-logo">ima</span> es tu aliado para el bienestar integral. Te ofrecemos un ecosistema de salud preventiva y correctiva, accesible y fácil de usar.
               </p>
             </div>
@@ -69,7 +70,7 @@ export default function Home() {
         <section id="activation" className="py-20 sm:py-24">
           <div className="container mx-auto px-4">
             <div className="mx-auto max-w-2xl text-center">
-              <h2 className="text-3xl font-bold tracking-tight text-primary sm:text-4xl font-headline">Así de fácil es activar tu beneficio</h2>
+              <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl font-headline">Así de fácil es activar tu beneficio</h2>
             </div>
 
             <div className="relative mt-16">
@@ -96,11 +97,11 @@ export default function Home() {
         </section>
         
         {/* Final CTA Section */}
-        <section className="bg-primary py-20 text-center sm:py-24">
+        <section className="bg-secondary/50 py-20 text-center sm:py-24">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold tracking-tight text-primary-foreground sm:text-4xl font-headline">Empieza a cuidar de ti hoy mismo</h2>
+            <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl font-headline">Empieza a cuidar de ti hoy mismo</h2>
             <div className="mt-8">
-              <Button size="lg" variant="secondary">
+              <Button size="lg">
                 Activar mi beneficio <ArrowRight className="ml-2" />
               </Button>
             </div>
@@ -108,12 +109,12 @@ export default function Home() {
         </section>
       </main>
 
-      <footer className="border-t border-border/20">
+      <footer className="border-t">
         <div className="container mx-auto px-4 py-12">
           <div className="flex flex-col items-center justify-between gap-8 md:flex-row">
             <div className="flex flex-col items-center gap-4 md:items-start">
               <h1 className="text-3xl font-bold text-primary font-logo">ima</h1>
-              <p className="text-sm text-foreground/60">© {new Date().getFullYear()} ima. Todos los derechos reservados.</p>
+              <p className="text-sm text-muted-foreground">© {new Date().getFullYear()} ima. Todos los derechos reservados.</p>
             </div>
             <div className="grid grid-cols-2 gap-8 text-center sm:grid-cols-3 md:text-left">
               <FooterLinks title="Legal" links={[{href: "#", text: "Aviso de privacidad"}, {href: "#", text: "Términos y condiciones"}]} />
@@ -121,9 +122,9 @@ export default function Home() {
               <FooterLinks title="Sitios" links={[{href: "#", text: "Sí Vale"}]} />
             </div>
             <div className="flex items-center gap-4">
-              <Link href="#" className="text-foreground/60 hover:text-primary" aria-label="Facebook"><Facebook /></Link>
-              <Link href="#" className="text-foreground/60 hover:text-primary" aria-label="Instagram"><Instagram /></Link>
-              <Link href="#" className="text-foreground/60 hover:text-primary" aria-label="Twitter"><Twitter /></Link>
+              <Link href="#" className="text-muted-foreground hover:text-primary" aria-label="Facebook"><Facebook /></Link>
+              <Link href="#" className="text-muted-foreground hover:text-primary" aria-label="Instagram"><Instagram /></Link>
+              <Link href="#" className="text-muted-foreground hover:text-primary" aria-label="Twitter"><Twitter /></Link>
             </div>
           </div>
         </div>
@@ -134,15 +135,15 @@ export default function Home() {
 
 function FeatureCard({ icon, title, description }: { icon: React.ReactNode; title: string; description: string }) {
   return (
-    <Card className="border-border/50 bg-transparent text-left transition-all hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5">
+    <Card className="bg-background/80 text-left transition-all hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5">
       <CardHeader>
         <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
           {icon}
         </div>
-        <CardTitle className="text-xl text-primary font-headline">{title}</CardTitle>
+        <CardTitle className="text-xl text-foreground font-headline">{title}</CardTitle>
       </CardHeader>
       <CardContent>
-        <p className="text-foreground/80">{description}</p>
+        <p className="text-muted-foreground">{description}</p>
       </CardContent>
     </Card>
   );
@@ -154,8 +155,8 @@ function ActivationStep({ step, title, description }: { step: string; title: str
       <div className="relative z-10 flex h-24 w-24 items-center justify-center rounded-full bg-background border-2 border-primary mx-auto">
         <span className="text-4xl font-bold text-primary">{step}</span>
       </div>
-      <h3 className="mt-6 text-xl font-bold text-primary font-headline">{title}</h3>
-      <p className="mt-2 text-foreground/80">{description}</p>
+      <h3 className="mt-6 text-xl font-bold text-foreground font-headline">{title}</h3>
+      <p className="mt-2 text-muted-foreground">{description}</p>
     </div>
   );
 }
@@ -163,11 +164,11 @@ function ActivationStep({ step, title, description }: { step: string; title: str
 function FooterLinks({ title, links }: { title: string; links: { href: string; text: string }[] }) {
   return (
     <div className="flex flex-col gap-3">
-      <h4 className="font-bold text-primary font-headline">{title}</h4>
+      <h4 className="font-bold text-foreground font-headline">{title}</h4>
       <ul className="space-y-2">
         {links.map((link) => (
           <li key={link.text}>
-            <Link href={link.href} className="text-sm text-foreground/80 hover:text-primary hover:underline">
+            <Link href={link.href} className="text-sm text-muted-foreground hover:text-primary hover:underline">
               {link.text}
             </Link>
           </li>
