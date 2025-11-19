@@ -1,7 +1,7 @@
 "use client"
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Sparkles, Camera, ArrowRight, Facebook, Instagram, Twitter } from "lucide-react";
+import { Sparkles, Camera, ArrowRight, Facebook, Instagram, Twitter, CalendarGift } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -57,7 +57,7 @@ export default function Home() {
             </div>
 
             {/* Feature Cards */}
-            <div className="mx-auto mt-16 grid max-w-md grid-cols-1 gap-8 sm:max-w-2xl lg:max-w-4xl lg:grid-cols-2">
+            <div className="mx-auto mt-16 grid max-w-md grid-cols-1 gap-8 sm:max-w-2xl lg:max-w-none lg:grid-cols-2">
               <FeatureCard
                 icon={<Sparkles className="h-8 w-8 text-primary" />}
                 title="Descubre de cuántos años te vez"
@@ -72,8 +72,28 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Gift Section */}
+        <section id="gift" className="py-20 sm:py-24">
+            <div className="container mx-auto px-4">
+                <div className="mx-auto max-w-3xl text-center bg-background p-8 sm:p-12 rounded-xl border border-primary/20 shadow-lg shadow-primary/5">
+                    <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 mb-6">
+                        <CalendarGift className="h-8 w-8 text-primary" />
+                    </div>
+                    <h2 className="text-3xl font-bold tracking-tight sm:text-4xl font-headline text-primary">Un regalo de Sí Vale para ti</h2>
+                    <p className="mt-4 text-lg text-muted-foreground max-w-xl mx-auto">
+                        Activa tu beneficio y disfruta de <span className="font-bold text-foreground">un mes de acceso total a ima</span>, cortesía de Sí Vale. Sin costo, sin compromisos.
+                    </p>
+                    <div className="mt-8">
+                        <Button size="lg">
+                            Obtener mi mes gratis <ArrowRight className="ml-2" />
+                        </Button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         {/* Activation Steps Section */}
-        <section id="activation" className="py-20 sm:py-24">
+        <section id="activation" className="py-20 sm:py-24 bg-secondary/50">
           <div className="container mx-auto px-4">
             <div className="mx-auto max-w-2xl text-center">
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl font-headline">Así de fácil es activar tu beneficio</h2>
@@ -103,7 +123,7 @@ export default function Home() {
         </section>
         
         {/* Final CTA Section */}
-        <section className="bg-secondary/50 py-20 text-center sm:py-24">
+        <section className="py-20 text-center sm:py-24">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl font-headline">Empieza a cuidar de ti hoy mismo</h2>
             <div className="mt-8">
