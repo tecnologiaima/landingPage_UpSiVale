@@ -37,7 +37,7 @@ export default function Home() {
             Tu bienestar, nuestra prioridad.
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
-            Con tu vale Sí Vale, accede a más de 25 herramientas de prevención y bienestar, potenciadas por la inteligencia artificial de ima para que tomes el control de tu salud.
+            Con Sí Vale, accede a más de 25 herramientas de prevención y bienestar, potenciadas por la inteligencia artificial de ima para que tomes el control de tu salud.
           </p>
           <div className="mt-10">
             <Button size="lg">
