@@ -1,0 +1,14 @@
+{
+  "hosting": {
+    "site": "ima-upsivale-landing",
+    "public": "out",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "frameworksBackend": {
+      "region": "us-central1"
+    }
+  }
+}

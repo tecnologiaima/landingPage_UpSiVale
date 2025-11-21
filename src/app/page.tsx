@@ -72,6 +72,7 @@ export default function Home() {
                 description="Usa nuestra IA para analizar tu rostro y estimar tu edad."
                 imageUrl={ageEstimationImage?.imageUrl}
                 imageHint={ageEstimationImage?.imageHint}
+                href="/age-estimation"
               />
               <FeatureCard
                 icon={<Camera className="h-8 w-8 text-primary" />}
@@ -79,6 +80,7 @@ export default function Home() {
                 description="Toma una foto de tu platillo y conoce sus detalles nutricionales."
                 imageUrl={foodAnalysisImage?.imageUrl}
                 imageHint={foodAnalysisImage?.imageHint}
+                href="/food-analysis"
               />
             </div>
           </div>
@@ -190,9 +192,9 @@ export default function Home() {
   );
 }
 
-function FeatureCard({ icon, title, description, imageUrl, imageHint }: { icon: React.ReactNode; title: string; description: string; imageUrl?: string; imageHint?: string }) {
-  return (
-    <Card className="bg-background/80 text-left transition-all hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 relative overflow-hidden group">
+function FeatureCard({ icon, title, description, imageUrl, imageHint, href }: { icon: React.ReactNode; title: string; description: string; imageUrl?: string; imageHint?: string; href?: string }) {
+  const content = (
+    <Card className="bg-background/80 text-left transition-all hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 relative overflow-hidden group h-full">
       {imageUrl && (
         <Image
           src={imageUrl}
@@ -214,6 +216,16 @@ function FeatureCard({ icon, title, description, imageUrl, imageHint }: { icon: 
       </div>
     </Card>
   );
+
+  if (href) {
+    return (
+      <Link href={href} className="block h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-xl">
+        {content}
+      </Link>
+    );
+  }
+
+  return content;
 }
 
 function ActivationStep({ step, title, description }: { step: string; title: string; description: string }) {
