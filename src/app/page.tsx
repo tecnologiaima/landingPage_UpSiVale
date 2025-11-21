@@ -181,8 +181,8 @@ export default function Home() {
               <FooterLinks title="Sitios" links={[{href: "https://www.sivale.mx/", text: "Sí Vale"}, {href: "https://preguntaleaima.com/", text: "ima"}]} />
             </div>
             <div className="flex items-center gap-4">
-              <Link href="#" className="text-muted-foreground hover:text-primary" aria-label="Facebook"><Facebook /></Link>
-              <Link href="#" className="text-muted-foreground hover:text-primary" aria-label="Instagram"><Instagram /></Link>
+              <Link href="https://www.facebook.com/preguntaleaima/?locale=es_LA" className="text-muted-foreground hover:text-primary" aria-label="Facebook"><Facebook /></Link>
+              <Link href="https://www.instagram.com/preguntaleaima/" className="text-muted-foreground hover:text-primary" aria-label="Instagram"><Instagram /></Link>
             </div>
           </div>
         </div>
