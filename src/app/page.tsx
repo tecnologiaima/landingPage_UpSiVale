@@ -1,7 +1,7 @@
 "use client"
 import { Button } from "@/components/ui/button";
 import { Card, CardTitle } from "@/components/ui/card";
-import { Sparkles, Camera, ArrowRight, Facebook, Instagram, Twitter, Gift } from "lucide-react";
+import { Sparkles, Camera, ArrowRight, Facebook, Instagram, Gift } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
@@ -183,7 +183,6 @@ export default function Home() {
             <div className="flex items-center gap-4">
               <Link href="#" className="text-muted-foreground hover:text-primary" aria-label="Facebook"><Facebook /></Link>
               <Link href="#" className="text-muted-foreground hover:text-primary" aria-label="Instagram"><Instagram /></Link>
-              <Link href="#" className="text-muted-foreground hover:text-primary" aria-label="Twitter"><Twitter /></Link>
             </div>
           </div>
         </div>
