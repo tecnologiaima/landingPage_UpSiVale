@@ -177,7 +177,7 @@ export default function Home() {
             </div>
             <div className="grid grid-cols-2 gap-8 text-center sm:grid-cols-3 md:text-left">
               <FooterLinks title="Legal" links={[{href: "https://preguntaleaima.com/aviso-de-privacidad/", text: "Aviso de privacidad"}, {href: "https://preguntaleaima.com/terminos-y-condiciones/", text: "Términos y condiciones"}]} />
-              <FooterLinks title="Ayuda" links={[{href: "#", text: "Preguntas frecuentes"}, {href: "#", text: "Contacto"}]} />
+              <FooterLinks title="Ayuda" links={[{href: "https://preguntaleaima.com/preguntas/", text: "Preguntas frecuentes"}, {href: "#", text: "Contacto"}]} />
               <FooterLinks title="Sitios" links={[{href: "https://www.sivale.mx/", text: "Sí Vale"}, {href: "https://preguntaleaima.com/", text: "ima"}]} />
             </div>
             <div className="flex items-center gap-4">
