@@ -7,7 +7,19 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Lock } from "lucide-react";
 
-type ResponsePayload = string | Record<string, unknown>;
+type CronosResponse = {
+  check?: boolean;
+  estimated_chronological_age?: number;
+  confidence_interval?: string;
+  certainty_level?: string;
+  confidence_score?: number;
+  primary_markers?: Record<string, unknown>;
+  secondary_markers?: Record<string, unknown>;
+  detected_limitations?: string[];
+  morphometric_evidence?: string[];
+  summary_ES?: string;
+  summary_EN?: string;
+};
 
 export default function AgeEstimationPage() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -24,9 +36,7 @@ export default function AgeEstimationPage() {
   const [emailError, setEmailError] = useState<string | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [isSending, setIsSending] = useState(false);
-  const [responseData, setResponseData] = useState<ResponsePayload | null>(
-    null
-  );
+  const [responseData, setResponseData] = useState<string | CronosResponse | null>(null);
   const [responseError, setResponseError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -87,6 +97,10 @@ export default function AgeEstimationPage() {
   const resetResponseState = () => {
     setResponseData(null);
     setResponseError(null);
+  };
+
+  const isCronosResponse = (data: unknown): data is CronosResponse => {
+    return typeof data === "object" && data !== null;
   };
 
   const statusMessage =
@@ -171,8 +185,7 @@ export default function AgeEstimationPage() {
         }
       );
 
-      let payload: ResponsePayload;
-
+      let payload: string | CronosResponse;
       const contentType = response.headers.get("content-type");
       if (contentType?.includes("application/json")) {
         payload = await response.json();
@@ -190,6 +203,7 @@ export default function AgeEstimationPage() {
       }
 
       setResponseData(payload);
+      setShowPreview(false);
     } catch (err) {
       console.error(err);
       setResponseError("No pudimos enviar la imagen. Inténtalo nuevamente.");
@@ -198,7 +212,119 @@ export default function AgeEstimationPage() {
     }
   };
 
-  return (
+  const handleGenerateAgain = () => {
+    setShowPreview(false);
+    setResponseData(null);
+    setResponseError(null);
+    setSelectedFile(null);
+    setCaptureUrl(null);
+  };
+
+  const renderResultSection = () => {
+    if (!responseData) return null;
+
+    if (!isCronosResponse(responseData)) {
+      return (
+        <div className="space-y-2 rounded-xl border border-[#9ff75f]/30 bg-[#0f2320] p-3">
+          <p className="text-sm font-semibold text-[#d9ff71]">Respuesta</p>
+          <pre className="max-h-48 overflow-auto whitespace-pre-wrap break-words text-xs text-[#b7f26c]">
+            {responseData}
+          </pre>
+        </div>
+      );
+    }
+
+    const estimatedAge = responseData.estimated_chronological_age;
+    const confidenceInterval =
+      responseData.confidence_interval || "Sin intervalo";
+    const certaintyLevel = responseData.certainty_level || "Sin nivel";
+    const confidenceScore =
+      typeof responseData.confidence_score === "number"
+        ? `${Math.round(responseData.confidence_score * 100)}%`
+        : null;
+    const summary =
+      responseData.summary_ES ||
+      responseData.summary_EN ||
+      "Tu rostro fue analizado exitosamente.";
+    const intervalParts = confidenceInterval.split("-");
+    const intervalMin = intervalParts[0]?.trim();
+    const intervalMax = intervalParts[1]?.trim();
+
+    return (
+      <div className="space-y-4">
+        <div className="relative overflow-hidden rounded-3xl border border-[#9ff75f]/40 bg-[#0a1b1a] shadow-[0_25px_80px_rgba(0,0,0,0.45)]">
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(147,255,109,0.18),transparent_55%)]" />
+          <div className="relative flex flex-col items-center gap-4 px-6 py-8 text-center">
+            <div className="relative flex flex-col items-center">
+              <span className="rounded-full bg-[#d9ff71] px-4 py-1 text-xs font-semibold text-[#0c1e1a] shadow-[0_10px_40px_rgba(155,247,95,0.45)]">
+                {confidenceInterval}
+              </span>
+              <div className="relative mt-3 h-44 w-44">
+                <div className="absolute inset-[-10%] rounded-full bg-[radial-gradient(circle_at_center,rgba(147,255,109,0.3),transparent_70%)] blur-xl" />
+                <div className="relative h-full w-full overflow-hidden rounded-full border-4 border-[#d9ff71] shadow-[0_0_60px_14px_rgba(147,255,109,0.35)]">
+                  <img
+                    src={captureUrl || ""}
+                    alt="Rostro analizado"
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+                <span className="absolute -bottom-3 left-1/2 -translate-x-1/2 rounded-full bg-[#d9ff71] px-4 py-1 text-sm font-semibold text-[#0c1e1a] shadow-[0_8px_30px_rgba(155,247,95,0.4)]">
+                  {estimatedAge ?? "--"}
+                </span>
+              </div>
+            </div>
+
+            <div className="flex flex-col items-center gap-1">
+              <p className="text-lg font-semibold text-[#d9ff71]">Cronos</p>
+              <p className="text-xs uppercase tracking-[0.2em] text-[#9ff75f]">
+                Estimación de edad
+              </p>
+            </div>
+
+            <div className="w-full rounded-2xl bg-[#d9ff71] p-4 text-center text-sm font-semibold text-[#0c1e1a] shadow-[0_20px_60px_rgba(155,247,95,0.35)]">
+              {`Estimada en ${estimatedAge ?? "—"} años (confianza ${
+                confidenceScore ?? "N/D"
+              })`}
+            </div>
+
+            <div className="grid w-full grid-cols-2 gap-3">
+              <div className="rounded-2xl border border-[#9ff75f]/40 bg-[#0f2320] px-4 py-3 text-center shadow-[0_10px_30px_rgba(0,0,0,0.25)]">
+                <p className="text-4xl font-extrabold text-[#d9ff71]">
+                  {estimatedAge ?? "--"}
+                </p>
+                <p className="text-xs text-[#9ff75f]">Edad estimada</p>
+              </div>
+              <div className="rounded-2xl border border-[#9ff75f]/40 bg-[#0f2320] px-4 py-3 text-center shadow-[0_10px_30px_rgba(0,0,0,0.25)]">
+                <p className="text-2xl font-bold text-[#d9ff71]">
+                  {intervalMin && intervalMax
+                    ? `${intervalMin} - ${intervalMax}`
+                    : confidenceInterval}
+                </p>
+                <p className="text-xs text-[#9ff75f]">Intervalo de confianza</p>
+              </div>
+            </div>
+
+            <div className="w-full space-y-2 rounded-2xl border border-[#9ff75f]/35 bg-[#0f2320] px-4 py-4 text-left shadow-[0_10px_40px_rgba(0,0,0,0.25)]">
+              <p className="text-base font-semibold text-[#d9ff71]">
+                ¿Qué nos dice tu rostro?
+              </p>
+              <p className="text-sm leading-relaxed text-[#9ff75f]">{summary}</p>
+            </div>
+
+            <Button
+              type="button"
+              onClick={handleGenerateAgain}
+              className="mt-2 w-full h-12 rounded-full bg-[#3d5b35] text-[#e8ff9c] text-base font-semibold shadow-[0_10px_30px_rgba(0,0,0,0.3)] hover:bg-[#4a6b43]"
+            >
+              Generar nuevamente
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const renderCaptureView = () => (
     <div className="min-h-screen bg-gradient-to-b from-[#04292d] via-[#04292d] to-[#031b1d] text-[#d9ff71] flex flex-col items-center px-6 py-10">
       <div className="w-full max-w-3xl flex flex-col items-center text-center gap-6">
         <div className="text-xl font-semibold uppercase tracking-[0.3em] text-[#c0f45a]">
@@ -290,35 +416,48 @@ export default function AgeEstimationPage() {
               </div>
             </div>
             <div className="space-y-3 px-4 pb-4">
-              <Button
-                type="button"
-                onClick={handleSendRequest}
-                disabled={isSending || !selectedFile}
-                className="w-full h-11 rounded-full bg-[#3d5b35] text-[#e8ff9c] text-base font-semibold shadow-md hover:bg-[#4a6b43]"
-              >
-                {isSending ? "Enviando..." : "Enviar para estimar"}
-              </Button>
+              {!responseData && (
+                <Button
+                  type="button"
+                  onClick={handleSendRequest}
+                  disabled={isSending || !selectedFile}
+                  className="w-full h-11 rounded-full bg-[#3d5b35] text-[#e8ff9c] text-base font-semibold shadow-md hover:bg-[#4a6b43]"
+                >
+                  {isSending ? "Enviando..." : "Enviar para estimar"}
+                </Button>
+              )}
 
               {responseError && (
                 <p className="text-sm text-red-300">{responseError}</p>
-              )}
-
-              {responseData !== null && (
-                <div className="space-y-2 rounded-xl border border-[#9ff75f]/30 bg-[#0f2320] p-3">
-                  <p className="text-sm font-semibold text-[#d9ff71]">
-                    Respuesta
-                  </p>
-                  <pre className="max-h-48 overflow-auto whitespace-pre-wrap break-words text-xs text-[#b7f26c]">
-                    {typeof responseData === "string"
-                      ? responseData
-                      : JSON.stringify(responseData, null, 2)}
-                  </pre>
-                </div>
               )}
             </div>
           </div>
         </div>
       )}
+    </div>
+  );
+
+  const renderResultView = () => (
+    <div className="min-h-screen bg-gradient-to-b from-[#04292d] via-[#04292d] to-[#031b1d] text-[#d9ff71] flex flex-col items-center px-6 py-10">
+      <div className="w-full max-w-3xl flex flex-col items-center text-center gap-6 mb-6">
+        <div className="text-xl font-semibold uppercase tracking-[0.3em] text-[#c0f45a]">
+          Cronos
+        </div>
+        <div className="space-y-1">
+          <h1 className="text-3xl sm:text-4xl font-bold text-[#d9ff71]">
+            Estimación de Edad
+          </h1>
+          <p className="text-sm text-[#9ff75f]">Resultados del análisis</p>
+        </div>
+      </div>
+
+      <div className="w-full max-w-xl">{renderResultSection()}</div>
+    </div>
+  );
+
+  return (
+    <>
+      {responseData ? renderResultView() : renderCaptureView()}
 
       {emailModalOpen && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/70 px-4">
@@ -369,6 +508,6 @@ export default function AgeEstimationPage() {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }
