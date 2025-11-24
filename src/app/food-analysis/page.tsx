@@ -12,6 +12,7 @@ import {
   Image as ImageIcon,
   Lock,
 } from "lucide-react";
+import { NutritionCard, FoodAnalysisData } from "@/components/NutritionCard";
 
 type ResponseData = string | Record<string, unknown> | Array<unknown> | null;
 
@@ -331,16 +332,27 @@ export default function FoodAnalysisPage() {
               )}
 
               {!!responseData && (
-                <div className="space-y-2 rounded-xl border border-[#9ff75f]/30 bg-[#0f2320] p-3">
-                  <p className="text-sm font-semibold text-[#d9ff71]">
-                    Respuesta del análisis
-                  </p>
-                  <pre className="max-h-48 overflow-auto whitespace-pre-wrap break-words text-xs text-[#b7f26c]">
-                    {typeof responseData === "string"
-                      ? responseData
-                      : JSON.stringify(responseData, null, 2)}
-                  </pre>
-                </div>
+                <>
+                  {typeof responseData === "object" &&
+                    responseData !== null &&
+                    !Array.isArray(responseData) &&
+                    (responseData as any).valid === true ? (
+                    <NutritionCard
+                      data={responseData as unknown as FoodAnalysisData}
+                    />
+                  ) : (
+                    <div className="space-y-2 rounded-xl border border-[#9ff75f]/30 bg-[#0f2320] p-3">
+                      <p className="text-sm font-semibold text-[#d9ff71]">
+                        Respuesta del análisis
+                      </p>
+                      <pre className="max-h-48 overflow-auto whitespace-pre-wrap break-words text-xs text-[#b7f26c]">
+                        {typeof responseData === "string"
+                          ? responseData
+                          : JSON.stringify(responseData, null, 2)}
+                      </pre>
+                    </div>
+                  )}
+                </>
               )}
             </div>
           </div>
